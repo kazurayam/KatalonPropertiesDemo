@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+   <description>This project demonstrates how katalon.properties file help overriding GlobalVariables runtime. katalon.properties file can be located under $HOME or under the directory specified as JVM System Property &quot;katalon.user.home&quot;.</description>
+   <name>KatalonPropertiesDemo</name>
+   <tag></tag>
+   <UUID>b4c8d823-a8de-47c4-bda9-c6850e57a4f3</UUID>
+   <pageLoadTimeout>0</pageLoadTimeout>
+</Project>

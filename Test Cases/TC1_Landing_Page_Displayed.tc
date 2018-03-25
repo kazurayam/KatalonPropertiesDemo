@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC1_Landing_Page_Displayed</name>
+   <tag></tag>
+   <comment>>>> URL=http://$GlobalVariable.hostname/</comment>
+   <testCaseGuid>3a85855d-1936-4aa4-8e7e-8a7396cee96f</testCaseGuid>
+</TestCaseEntity>

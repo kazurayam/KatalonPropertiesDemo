@@ -1,0 +1,20 @@
+# emacs
+*~
+
+# vim
+.swp
+
+# https://github.com/katalon-studio/ShadowDOMSampleProject/blob/master/.gitignore#L3
+
+\.classpath
+
+\.project
+
+\.settings/
+
+bin/lib/
+
+Libs/
+
+Reports/
+/bin/
