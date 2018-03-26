@@ -5,7 +5,7 @@ Demonstrating how katalon.properties file enhances usability of Katalon Studio
 
 This is a simple [Katalon Studio](https://www.katalon.com/katalon-studio/) project for demonstration purpose.
 
-This shows you how I overwrite the GlobalVariables in my Katalon project with values loaded from `katalon.properties` files. The `katalon.properties` files can be located outside the project, not included in the git repository. Hence I can hide my sensitive information (hostname, credentials etc) even if I put the project publicly shared at GitHub.
+This shows you how I overwrite the GlobalVariables in my Katalon project with values loaded from `katalon.properties` files. The `katalon.properties` files can be located in multiple locations outside the project. You can exclude them from Git repository. Hence I can hide my sensitive information (hostname, credentials etc) even if I put the project publicly shared at GitHub.
 
 # Problems to solve
 
