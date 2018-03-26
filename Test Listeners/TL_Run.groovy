@@ -35,15 +35,17 @@ class TL_Run {
      */
     @BeforeTestSuite
     def sampleBeforeTestSuite(TestSuiteContext testSuiteContext) {
-        WebUI.comment(">>> GlobalVarialbe.hostname default value: ${GlobalVariable.hostname}");
         KatalonProperties props = new KatalonProperties()
-        String priorityHostname = props.getProperty('GlobalVariable.hostname')
-        if (priorityHostname != null) {
-            GlobalVariable.hostname = priorityHostname;
-            WebUI.comment(">>> GlobalVariable.hostname new value: ${priorityHostname}");
+        // get appropriate value for GlobalVariable.hostname loaded from katalon.properties files
+        WebUI.comment(">>> GlobalVariable.hostname default value: \'${GlobalVariable.hostname}\'");
+        String preferedHostname = props.getProperty('GlobalVariable.hostname')
+        if (preferedHostname != null) {
+            GlobalVariable.hostname = preferedHostname;
+            WebUI.comment(">>> GlobalVariable.hostname new value: \'${preferedHostname}\'");
         } else {
             WebUI.comment(">>> GlobalVariable.hostname stays unchanged");
         }
+        // do similarly for GlobalVariable.username and GlobalVariable.password
     }
 
 }

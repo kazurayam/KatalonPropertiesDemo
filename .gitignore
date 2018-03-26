@@ -4,17 +4,17 @@
 # vim
 .swp
 
-# https://github.com/katalon-studio/ShadowDOMSampleProject/blob/master/.gitignore#L3
-
+## proposed by https://github.com/katalon-studio/ShadowDOMSampleProject/blob/master/.gitignore#L3
 \.classpath
-
 \.project
-
 \.settings/
-
 bin/lib/
-
 Libs/
 
+## I do not want Report to be published
 Reports/
 /bin/
+
+## If you want hide your confidential information,
+## ignore the katalon.properties in the Project root directory
+#katalon.properties
