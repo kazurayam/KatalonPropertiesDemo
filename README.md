@@ -31,7 +31,7 @@ I want to do as follows:
 GlobalVariable.hostname=demoaut.katalon.com
 ```
 5. Select the Test Suite `TS_Run` and run it with Firefox.
-6. In the Log Viewer you will find lines like this:
+6. In the Log Viewer you will find INFO lines like this:
 ```
 Starting invoke 'com.kms.katalon.core.annotation.BeforeTestSuite' method: 'TL_Run.sampleBeforeTestSuite(...)'
 >>> GlobalVariable.hostname default value: ''
@@ -80,7 +80,7 @@ Finally I want to test the staging environment by typing like this:
 ```
 In this case `C:\Users\myname\tmp\staging\katalon.properties` file should be loaded by the Test Listener.
 
-I would like to enphasize that `-Dkatalon.user.home=XXXXXXXXX` argument would enhance the usability of Katalon Studio significantly. Provided with this feature I can switch the AUT just by typing different location of `katalon.properties` file as a command line argument, while no modification in the project's code set required at all. This feature will make it easy to run Katalon Studio in the Continuous Integration process in Jenkins targeting multiple hosts. This will make Katalon studio applicable to [Blue-Green deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html). 
+I would like to enphasize that `-Dkatalon.user.home=XXXXXXXXX` argument would enhance the usability of Katalon Studio significantly. Provided with this feature I can switch the AUT just by typing different location of `katalon.properties` file as a command line argument, while no modification in the project's code set required at all. This feature will make it easy to run Katalon Studio in Continuous Integration processes in Jenkins targeting multiple hosts. This will make Katalon Studio a good tool applicable to [Blue-Green deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html).
 
 I am aware that Katalon Studio v5.3.1 [Console Mode Execution](https://docs.katalon.com/display/KD/Console+Mode+Execution) does NOT accept arguments to add JVM System Properties. I want the  Katalon Team to consider adding this feature.
 
