@@ -53,7 +53,7 @@ Here I propose to introduce `katalon.properties` file as a method to configure a
 + I made a [`Test Listener`](https://docs.katalon.com/pages/viewpage.action?pageId=5126383) in the demo project. In the [method annotated with `@BeforeTestSuite`](https://github.com/kazurayam/KatalonPropertiesDemo/blob/master/Test%20Listeners/TL_Run.groovy), it instanciates a  KatalonProperties object which loads ./katalon.profiles and $HOME/katalon.properties on startup. The Test Listener overwrites the `GlobalVariable.hostname` with the value picked up from external file.
 + Once overridden, the new value of `GlobalVariable.hostname` is refered to throughout the Test Suite run.
 
-Here I confess that the design of runtime-configuration using properites file comes from [gradle.properties](https://docs.gradle.org/4.6/userguide/build_environment.html#sec:gradle_configuration_properties).
+Here I confess that the design of runtime-configuration using properties file comes from [gradle.properties](https://docs.gradle.org/4.6/userguide/build_environment.html#sec:gradle_configuration_properties).
 
 
 # Proposal to Katalon Studio
