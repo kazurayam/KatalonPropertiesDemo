@@ -14,12 +14,12 @@ Let me assume, I have a single Web Application in multiple environments: the dev
 + Hostname --- e.g. [`demoaut-mimic.kazurayam.com`](http://demoaut-mimic.kazurayam.com) for development, [`demoaut.katalon.com`](http://demoaut.katalon.com/) for production
 + Username/Password --- e.g. `kazurayam/foobar` for development, `John Doe/ThisIsNotAPassword` for production.
 
-I want to do as follows:
+Now I want to:
 
 1. I want to use [Katalon Studio](https://www.katalon.com/) to test Web UI of all these environments using a single set of Test Suites/Test Cases.
-3. I am quite willing to make code changes while targeting to the development environment. But I am reluctant to make changes in order to switch targets.
-4. I want to store the Katalon project into the GitHub and to expose it public (just as I did [here](https://github.com/kazurayam/KatalonPropertiesDemo)).
-5. Still I want to hide my sensitive information: hostname, username and password. I do not like making them visible anywhere in the repository.
+2. I want to store the Katalon project into the GitHub and to expose it public (just as I did [here](https://github.com/kazurayam/KatalonPropertiesDemo)).
+3. Still I want to hide my sensitive information: hostname, username and password. I do not like making them visible anywhere in the repository.
+4. I want to run the test against multiple targets (hostnames) in Continuous Integration process on Jenkins. In order to do this, I need to be able to switch the test target by command line argument without modifying the source code of the test at all. 
 
 # How to run the demo
 
