@@ -15,6 +15,7 @@ Libs/
 Reports/
 /bin/
 
-## If you want hide your confidential information,
-## ignore the katalon.properties in the Project root directory
-#katalon.properties
+
+## If you want to hide your confidential information,
+## uncomment the following line
+# /katalon.properties
