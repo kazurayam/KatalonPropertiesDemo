@@ -19,16 +19,16 @@ I want to do as follows:
 1. I want to use [Katalon Studio](https://www.katalon.com/) to test Web UI of all these environments using a single set of Test Suites/Test Cases.
 3. I am quite willing to make code changes while targeting to the development environment. But I am reluctant to make changes in order to switch targets.
 4. I want to store the Katalon project into the GitHub and to expose it public (just as I did [here](https://github.com/kazurayam/KatalonPropertiesDemo)).
-5. Still I want to hide my sensitive information: hostname, username and password. I do not make them visible anywhere in the repository.
+5. Still I want to hide my sensitive information: hostname, username and password. I do not like making them visible anywhere in the repository.
 
 # How to run the demo
 
 1. git clone [this demo project](https://github.com/kazurayam/KatalonPropertiesDemo) to your PC.
 2. Start Katalon Studio and open the downloaded project.
-3. This demo project depends on an external jar `MultiSourcedProperties-1.0.jar` which you can download from  [here](https://github.com/kazurayam/MultiSourcedProperties/raw/master/build/libs/MultiSourcedProperties-1.0.jar). You needto to download it and [configure the Katalon Studio project to refer to the external lib](https://docs.katalon.com/display/KD/External+Libraries). Do `Project > Settings > External Libraries > Add` operation.
-4. You want to create `%USERPROFILE%\katalon.properties` file for Windows, `$HOME/katalon.properties` file for Mac. The file contains following line:
+3. This demo project depends on an external jar `MultiSourcedProperties-1.0.jar` which you can download from  [here](https://github.com/kazurayam/MultiSourcedProperties/raw/master/build/libs/MultiSourcedProperties-1.0.jar). You need to download it and [configure the Katalon Studio project to refer to the external lib](https://docs.katalon.com/display/KD/External+Libraries). Do `Project > Settings > External Libraries > Add` operation.
+4. You want to create a file `%USERPROFILE%\katalon.properties` for Windows, `$HOME/katalon.properties` for Mac. The file should contain following line:
 ```
-GloableVariable.hostname=demoaut.katalon.com
+GlobalVariable.hostname=demoaut.katalon.com
 ```
 5. Select the Test Suite `TS_Run` and run it with Firefox.
 6. In the Log Viewer you will find lines like this:
@@ -37,7 +37,7 @@ Starting invoke 'com.kms.katalon.core.annotation.BeforeTestSuite' method: 'TL_Ru
 >>> GlobalVariable.hostname default value: ''
 >>> GlobalVariable.hostname new value: 'demoaut.katalon.com'
 ```
-These lines indicates that the GlobalVariable.hostname initially had empty value, but it was changed by the Test Listener with new value loaded from `katalon.properties` file you created.
+These lines indicates that the `GlobalVariable.hostname` initially had empty value, and was changed by the Test Listener with new value loaded from `katalon.properties` file you created.
 
 # How I solved it
 
@@ -51,6 +51,9 @@ Here I propose to introduce `katalon.properties` file as a method to configure a
 + I haved developed a Groovy class `com.kazurayam.KatalonProperties`. The code is avaiable [here](https://github.com/kazurayam/MultiSourcedProperties). This class is capable of loading properties from multiple locations as described above. This class is contained in [`MultiSourcedProperties-1.0.jar`](https://github.com/kazurayam/MultiSourcedProperties/raw/master/build/libs/MultiSourcedProperties-1.0.jar).
 + I made a [`Test Listener`](https://docs.katalon.com/pages/viewpage.action?pageId=5126383) in the demo project. In the [method annotated with `@BeforeTestSuite`](https://github.com/kazurayam/KatalonPropertiesDemo/blob/master/Test%20Listeners/TL_Run.groovy), it instanciates a  KatalonProperties object which loads ./katalon.profiles and $HOME/katalon.properties on startup. The Test Listener overwrites the `GlobalVariable.hostname` with value picked up from external file.
 + Once overridden, the new value of `GlobalVariable.hostname` is refered to throughout the Test Suite run.
+
+Here I confess that the design of runtime-configuration using properites file comes form [gradle.properties](https://docs.gradle.org/4.6/userguide/build_environment.html#sec:gradle_configuration_properties).
+
 
 # Proposal to Katalon Studio
 
