@@ -48,7 +48,7 @@ Here I propose to introduce `katalon.properties` file as a method to configure a
     1. `<current directory>/katalon.properties` is loaded if exists
     2. `$HOME/katalon.properties` on Mac/Linux, `%USERPROFILE%\katalon.properties` on Windows is loaded if exists
     3. If JVM System Property `katalon.user.home` is given, then a `katalon.properties` file under the directory `new File(System.getProperty("katalon.user.home"))` is searched and loaded.
-+ I haved developed a Groovy class `com.kazurayam.KatalonProperties`. The code is avaiable [here](https://github.com/kazurayam/MultiSourcedProperties). This class is capable of loading properties from multiple locations as described above. This class is contained in [`MultiSourcedProperties-1.0.jar`](https://github.com/kazurayam/MultiSourcedProperties/raw/master/build/libs/MultiSourcedProperties-1.0.jar).
++ I have developed a Groovy class `com.kazurayam.KatalonProperties`. The code is avaiable [here](https://github.com/kazurayam/MultiSourcedProperties). This class is capable of loading properties from multiple locations as described above. This class is contained in the  [`MultiSourcedProperties-1.0.jar`](https://github.com/kazurayam/MultiSourcedProperties/raw/master/build/libs/MultiSourcedProperties-1.0.jar).
 + I made a [`Test Listener`](https://docs.katalon.com/pages/viewpage.action?pageId=5126383) in the demo project. In the [method annotated with `@BeforeTestSuite`](https://github.com/kazurayam/KatalonPropertiesDemo/blob/master/Test%20Listeners/TL_Run.groovy), it instanciates a  KatalonProperties object which loads ./katalon.profiles and $HOME/katalon.properties on startup. The Test Listener overwrites the `GlobalVariable.hostname` with value picked up from external file.
 + Once overridden, the new value of `GlobalVariable.hostname` is refered to throughout the Test Suite run.
 
@@ -84,7 +84,7 @@ I would like to enphasize that `-Dkatalon.user.home=XXXXXXXXX` argument would en
 
 I am aware that Katalon Studio v5.3.1 [Console Mode Execution](https://docs.katalon.com/display/KD/Console+Mode+Execution) does NOT accept arguments to add JVM System Properties. I want the  Katalon Team to consider adding this feature.
 
-# Related Katalon discussions
+# Related discussions
 
 In the [Katalon Discussion Forum](https://forum.katalon.com/discussions) I found a few discussions on test reuse and hiding credentials.
 
