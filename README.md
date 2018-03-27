@@ -19,7 +19,7 @@ Now I want to:
 1. I want to use [Katalon Studio](https://www.katalon.com/) to test Web UI of all these environments using a single set of Test Suites/Test Cases.
 2. I want to store the Katalon project into the GitHub and to expose it public (just as I did [here](https://github.com/kazurayam/KatalonPropertiesDemo)).
 3. Still I want to hide my sensitive information: hostname, username and password. I do not like making them visible anywhere in the repository.
-4. I want to run the test against multiple targets (hostnames) in Continuous Integration process on Jenkins. In order to do this, I need to be able to switch the test target by command line argument without modifying the source code of the test at all. 
+4. I want to run the test against multiple targets (hostnames) in Continuous Integration process on Jenkins. In order to do this, I need to be able to switch the test target by command line argument without modifying the source code of the test at all.
 
 # How to run the demo
 
@@ -49,7 +49,7 @@ Here I propose to introduce `katalon.properties` file as a method to configure a
     2. `$HOME/katalon.properties` on Mac/Linux, `%USERPROFILE%\katalon.properties` on Windows is loaded if exists
     3. If JVM System Property `katalon.user.home` is given, then a `katalon.properties` file under the directory `new File(System.getProperty("katalon.user.home"))` is searched and loaded.
 + I have developed a Groovy class `com.kazurayam.KatalonProperties`. The code is avaiable [here](https://github.com/kazurayam/MultiSourcedProperties). This class is capable of loading properties from multiple locations as described above. This class is contained in the  [`MultiSourcedProperties-1.0.jar`](https://github.com/kazurayam/MultiSourcedProperties/raw/master/build/libs/MultiSourcedProperties-1.0.jar).
-+ I made a [`Test Listener`](https://docs.katalon.com/pages/viewpage.action?pageId=5126383) in the demo project. In the [method annotated with `@BeforeTestSuite`](https://github.com/kazurayam/KatalonPropertiesDemo/blob/master/Test%20Listeners/TL_Run.groovy), it instanciates a  KatalonProperties object which loads ./katalon.profiles and $HOME/katalon.properties on startup. The Test Listener overwrites the `GlobalVariable.hostname` with value picked up from external file.
++ I made a [`Test Listener`](https://docs.katalon.com/pages/viewpage.action?pageId=5126383) in the demo project. In the [method annotated with `@BeforeTestSuite`](https://github.com/kazurayam/KatalonPropertiesDemo/blob/master/Test%20Listeners/TL_Run.groovy), it instanciates a  KatalonProperties object which loads ./katalon.profiles and $HOME/katalon.properties on startup. The Test Listener overwrites the `GlobalVariable.hostname` with the value picked up from external file.
 + Once overridden, the new value of `GlobalVariable.hostname` is refered to throughout the Test Suite run.
 
 Here I confess that the design of runtime-configuration using properites file comes from [gradle.properties](https://docs.gradle.org/4.6/userguide/build_environment.html#sec:gradle_configuration_properties).
@@ -80,15 +80,27 @@ Finally I want to test the staging environment by typing like this:
 ```
 In this case `C:\Users\myname\tmp\staging\katalon.properties` file should be loaded by the Test Listener.
 
-I would like to enphasize that `-Dkatalon.user.home=XXXXXXXXX` argument would enhance the usability of Katalon Studio significantly. Provided with this feature I can switch the AUT just by typing different location of `katalon.properties` file as a command line argument, while no modification in the project's code set required at all. This feature will make it easy to run Katalon Studio in Continuous Integration processes in Jenkins targeting multiple hosts. This will make Katalon Studio a good tool applicable to [Blue-Green deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html).
+I would like to emphasize that `-Dkatalon.user.home=XXXXXXXXX` argument would enhance the usability of Katalon Studio significantly. Provided with this feature I can switch the AUT just by typing different location of `katalon.properties` file as a command line argument, while no modification in the project's code set required at all. This feature will make it easy to run Katalon Studio in Continuous Integration processes in Jenkins targeting multiple hosts. This will make Katalon Studio a good tool applicable to [Blue-Green deployment](https://martinfowler.com/bliki/BlueGreenDeployment.html).
 
-I am aware that Katalon Studio v5.3.1 [Console Mode Execution](https://docs.katalon.com/display/KD/Console+Mode+Execution) does NOT accept arguments to add JVM System Properties. I want the  Katalon Team to consider adding this feature.
+I am aware that Katalon Studio v5.3.1 [Console Mode Execution](https://docs.katalon.com/display/KD/Console+Mode+Execution) does NOT accept the `-Dnnnn=xxxx` arguments. I home Katalon Team to consider adding this feature.
 
 # Related discussions
 
-In the [Katalon Discussion Forum](https://forum.katalon.com/discussions) I found a few discussions on test reuse and hiding credentials.
+In the [Katalon Discussion Forum](https://forum.katalon.com/discussions) I found quite a few discussions on test reuse, passing parameters to automated tests, and hiding credentials.
 
 - [Is it possible to use the same test for different sites?](https://forum.katalon.com/discussion/5689/is-it-possible-to-use-the-same-test-for-different-sites#latest)
+- [Automate running a test from maven (as part of build process)](https://forum.katalon.com/discussion/5696/automate-running-a-test-from-maven-as-part-of-build-process#latest)
+- [How to pass user defined parameters from command line](https://forum.katalon.com/discussion/4586/how-to-pass-user-defined-parameters-from-command-line#latest)
+- [How to pass the the parameter to the Test listener method..](https://forum.katalon.com/discussion/5490/how-to-pass-the-the-parameter-to-the-test-listener-method#latest)
 - [Want to overwrite credential info as GlobalVariable with properties file from command line argument](https://forum.katalon.com/discussion/5362/want-to-overwrite-credential-info-as-globalvariable-with-properties-file-for-commandline-argument)
+- [How to change site based on environmet?](https://forum.katalon.com/discussion/5366/how-to-change-site-based-on-environmet#latest)
+- [Inject data with external file?](https://forum.katalon.com/discussion/5352/inject-data-with-external-file#latest)
+- [Possibility to send property/variable through Katalon console cmd line](https://forum.katalon.com/discussion/4906/possibility-to-send-property-variable-through-katalon-console-cmd-line#latest)
+- [Store variables like username and password](https://forum.katalon.com/discussion/5271/store-variables-like-username-and-password#latest)
+- [Variable URL](https://forum.katalon.com/discussion/5034/variable-url#latest)
+- [How to pass user defined parameters from command line](https://forum.katalon.com/discussion/4586/how-to-pass-user-defined-parameters-from-command-line#latest)
+- [Passing variables from jenkins to katalon scripts](https://forum.katalon.com/discussion/4152/passing-variables-from-jenkins-to-katalon-scripts#latest)
+- [pass global variable value to Katalon in CMD line](https://forum.katalon.com/discussion/2125/pass-global-variable-value-to-katalon-in-cmd-line#latest)
+- [Maintain different environment properties file and run in multiple environment same time](https://forum.katalon.com/discussion/4983/maintain-different-environment-properties-file-and-run-in-multiple-environment-same-time#latest)
 
 I hope my study suggests something useful to those who may concern.
