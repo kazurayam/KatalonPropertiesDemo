@@ -7,6 +7,10 @@ This is a simple [Katalon Studio](https://www.katalon.com/katalon-studio/) proje
 
 This will show you how I overwrite GlobalVariables in my Katalon project with parameters loaded from `katalon.properties` files. `katalon.properties` file can be located in multiple locations and I can choose where to locate them. I can exclude `katalon.properties` files from Git repository. Hence I can hide my sensitive information (hostname, credentials etc) even if I put the project publicly shared at GitHub.
 
+# Target version
+
+This demo was originally tested against the Katalon Studio version 5.3.1.
+
 # Problems to solve
 
 Let me assume, I have a single Web Application in multiple environments: the development, the staging, the production-blue, the production-green and more. These environments have 99% same contents and features except the following differences:
