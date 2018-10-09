@@ -29,7 +29,7 @@ Now I want to:
 
 1. git clone [this demo project](https://github.com/kazurayam/KatalonPropertiesDemo) to your PC.
 2. Start Katalon Studio and open the downloaded project.
-3. This demo project depends on an external jar `MultiSourcedProperties-1.0.jar` which you can download from  [here](https://github.com/kazurayam/MultiSourcedProperties/raw/master/build/libs/MultiSourcedProperties-1.0.jar). You need to download it and [configure the Katalon Studio project to refer to the external lib](https://docs.katalon.com/display/KD/External+Libraries). Do `Project > Settings > External Libraries > Add` operation.
+3. This demo project depends on an external jar `MultiSourcedProperties-1.0.jar` which you can download from  [here](https://github.com/kazurayam/MultiSourcedProperties/raw/master/build/libs/MultiSourcedProperties-1.0.jar) or [MultiSourcedProperties/releases](https://github.com/kazurayam/MultiSourcedProperties/releases) page. You need to download it and [configure the Katalon Studio project to refer to the external lib](https://docs.katalon.com/display/KD/External+Libraries). Do `Project > Settings > External Libraries > Add` operation.
 4. You want to create a file `%USERPROFILE%\katalon.properties` for Windows, `$HOME/katalon.properties` for Mac. The file should contain following line:
 ```
 GlobalVariable.hostname=demoaut.katalon.com
@@ -51,7 +51,7 @@ Here I propose to introduce `katalon.properties` file as a method to configure a
 + On my PC, I can create `katalon.properties` files in [`java.util.Properties`](https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html) format in various locations as the following list shows. If a single Property is declared in multiple locations, the last wins:
     1. `<current directory>/katalon.properties` is loaded if exists
     2. `$HOME/katalon.properties` on Mac/Linux, `%USERPROFILE%\katalon.properties` on Windows is loaded if exists
-    3. If environment variable `KATALON_USER_HOME` is given, then a `katalon.properties` file under the directory `new File(System.getenv('KATALON_USER_HOME'))` is searched and loaded. 
+    3. If environment variable `KATALON_USER_HOME` is given, then a `katalon.properties` file under the directory `new File(System.getenv('KATALON_USER_HOME'))` is searched and loaded.
     4. If JVM System Property `katalon.user.home` is given, then a `katalon.properties` file under the directory `new File(System.getProperty("katalon.user.home"))` is searched and loaded.
 + I have developed a Groovy class `com.kazurayam.KatalonProperties`. The code is avaiable in another GitHub repository  [kazurayam/MultiSourcedProperties](https://github.com/kazurayam/MultiSourcedProperties). This class is capable of loading properties from multiple locations as described above. This class is contained in the  [`MultiSourcedProperties-1.0.jar`](https://github.com/kazurayam/MultiSourcedProperties/raw/master/build/libs/MultiSourcedProperties-1.0.jar).
 + I made a [`Test Listener`](https://docs.katalon.com/pages/viewpage.action?pageId=5126383) in the demo project. In the [method annotated with `@BeforeTestSuite`](https://github.com/kazurayam/KatalonPropertiesDemo/blob/master/Test%20Listeners/TL_Run.groovy), it instanciates a  KatalonProperties object which loads ./katalon.profiles and $HOME/katalon.properties on startup. The Test Listener overwrites the `GlobalVariable.hostname` with the value picked up from external file.
